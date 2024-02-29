@@ -1,4 +1,4 @@
-from fastapi import FastAPI, File, Form, UploadFile
+from fastapi import FastAPI, File, Form, UploadFile, Body
 from typing import Annotated
 
 app = FastAPI()
@@ -8,10 +8,12 @@ app = FastAPI()
 async def create_file(
         file: Annotated[bytes, File()],
         fileb: Annotated[UploadFile, File()],
-        token: Annotated[str, Form()]
+        token: Annotated[str, Form()],
+        hello: str = Body(...)
 ):
     return {
         "file_size": len(file),
         "token": token,
-        "fileb_content_type": fileb.content_type
+        "fileb_content_type": fileb.content_type,
+        "hello": hello
     }
