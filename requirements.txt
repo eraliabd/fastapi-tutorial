@@ -2,3 +2,5 @@ fastapi==0.109.2
 uvicorn[standard]
 pydantic[email]
 python-multipart
+python-jose[cryptography]
+passlib[bcrypt]
