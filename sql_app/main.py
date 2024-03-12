@@ -53,3 +53,9 @@ async def create_item_for_user(
 async def read_items(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     items = crud.get_items(db, skip=skip, limit=limit)
     return items
+
+
+@app.get("/user/items", response_model=list[schemas.Item], status_code=200)
+async def read_items_for_user(user_id: int, skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    items = crud.get_items_for_user(db, user_id=user_id, skip=skip, limit=limit)
+    return items
