@@ -1,0 +1,12 @@
+
+message to blah@example.com
+found query: hello world
+message to blah123@example.com
+found query: hello world
+message to blah123@example.com
+found query: hello world
+message to blah123@example.com
+found query: hello world
+message to blah123@example.com
+found query: hello world
+message to blah123@example.com
