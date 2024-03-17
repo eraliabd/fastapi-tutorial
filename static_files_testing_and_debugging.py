@@ -1,3 +1,4 @@
+import uvicorn
 from fastapi import FastAPI, Header, HTTPException
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
@@ -23,7 +24,7 @@ class Item(BaseModel):
     description: str | None = None
 
 
-@app.get("/items/{item_id}")
+@app.get("/items/{item_id}", response_model=Item)
 async def read_item(item_id: str, x_token: str = Header(...)):
     if x_token != fake_secret_token:
         raise HTTPException(status_code=400, detail="Invalid X-Token header")
@@ -32,7 +33,7 @@ async def read_item(item_id: str, x_token: str = Header(...)):
     return fake_db[item_id]
 
 
-@app.post("/items/{item_id}")
+@app.post("/items/", response_model=Item)
 async def create_item(item: Item, x_token: str = Header(...)):
     if x_token != fake_secret_token:
         raise HTTPException(status_code=400, detail="Invalid X-Token header")
@@ -41,3 +42,8 @@ async def create_item(item: Item, x_token: str = Header(...)):
 
     fake_db[item.id] = item
     return item
+
+
+# Debugging
+if __name__ == '__main__':
+    uvicorn.run(app=app, host='0.0.0.0', port=8000)

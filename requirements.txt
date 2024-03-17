@@ -8,3 +8,6 @@ SQLAlchemy
 pytest
 requests
 mock
+sqlmodel
+sqladmin
+httpx
